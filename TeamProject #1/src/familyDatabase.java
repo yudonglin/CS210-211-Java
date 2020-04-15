@@ -4,10 +4,12 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class familyDatabase {
-   // creates Arraylist
    private ArrayList<Person> allPersons = new ArrayList<Person>();
+   
+   private static final String end = "END";
+   
 
-   // creates constructor for family database
+// creates constructor for family database
    public familyDatabase(String fileName) throws FileNotFoundException {
 	   this.addAllPeople(fileName);
    }
@@ -16,13 +18,13 @@ public class familyDatabase {
 	   Scanner scan = new Scanner(new File(fileName));
 	   while (scan.hasNextLine()) {
 		   String sonName = scan.nextLine();
-		   if(sonName.equals("END")) {
+		   if(sonName.equals(end)) {
 			   break;
 		   }
 	   }
 	   while (scan.hasNextLine()) {
 		   String sonName = scan.nextLine();
-		   if (sonName.equals("END")) {
+		   if (sonName.equals(end)) {
 			   break;
 		   }else {
 			   String motherName = scan.nextLine();
