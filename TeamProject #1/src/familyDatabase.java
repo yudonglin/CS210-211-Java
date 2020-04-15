@@ -8,13 +8,8 @@ public class familyDatabase {
    
    private static final String end = "END";
    
-
 // creates constructor for family database
    public familyDatabase(String fileName) throws FileNotFoundException {
-	   this.addAllPeople(fileName);
-   }
-   
-   public void addAllPeople(String fileName) throws FileNotFoundException {
 	   Scanner scan = new Scanner(new File(fileName));
 	   while (scan.hasNextLine()) {
 		   String sonName = scan.nextLine();
@@ -54,7 +49,7 @@ public class familyDatabase {
    public int ifAdded(String personName) {
 	   if(this.allPersons.size()>0) {
 		   for(int i=0; i<this.allPersons.size();i++) {
-			   if(this.allPersons.get(i).getName().equals(personName) || this.allPersons.get(i).getName().equals(personName)) {
+			   if(this.allPersons.get(i).getName().equals(personName)) {
 				   return i;
 			   }
 		   }
