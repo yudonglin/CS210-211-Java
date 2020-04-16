@@ -25,7 +25,7 @@ public class familyDatabase {
 			   String motherName = scan.nextLine();
 			   String fatherName = scan.nextLine();
 			   Person newSon = new Person(sonName);
-			   if (motherName != null) {
+			   if (!motherName.equals("unknown")) {
 				   int id = ifAdded(motherName);
 				   if (id == -1) {
 					   Person newMother = new Person(motherName);
@@ -35,7 +35,7 @@ public class familyDatabase {
 					   newSon.setMother(this.allPersons.get(id));
 				   }
 			   }
-			   if (fatherName != null) {
+			   if (!fatherName.equals("unknown")) {
 				   int id = ifAdded(fatherName);
 				   if (id == -1) {
 					   Person newFather = new Person(fatherName);
