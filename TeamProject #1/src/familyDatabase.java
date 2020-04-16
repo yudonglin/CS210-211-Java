@@ -8,7 +8,7 @@ public class familyDatabase {
    
    private static final String end = "END";
    
-// creates constructor for family database
+   // creates constructor for family database
    public familyDatabase(String fileName) throws FileNotFoundException {
 	   Scanner scan = new Scanner(new File(fileName));
 	   while (scan.hasNextLine()) {

@@ -23,7 +23,7 @@ public class Person {
 		this.mother = mother;
 		mother.addChildren(this);
 	}
-		
+	
 	public void setFather(Person father) {
 		this.father = father;
 		father.addChildren(this);
@@ -55,7 +55,7 @@ public class Person {
 			return null;
 		}
 	}
-			
+	
 	public Person getFather() {
 		if (this.father != null) {
 			return this.father;
@@ -73,7 +73,7 @@ public class Person {
 	}
 	
 	public boolean ifAChild(Person child) {
-		for(var i=0;i<this.children.size();i++) {
+		for(int i=0;i<this.children.size();i++) {
 			if(this.children.get(i).getName() == child.getName()) {
 				return true;
 			}
@@ -84,7 +84,7 @@ public class Person {
 	public Person getChild(int i) { //Return one child at a specific index
 		return children.get(i);
 	}
-			
+	
 	public ArrayList<Person> getChildren() { //Return the whole index of children.
 		return children;
 	}
