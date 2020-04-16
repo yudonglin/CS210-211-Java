@@ -21,28 +21,9 @@ public class FamilyTest {
   
   String s = in.nextLine();
   Person that_Person = r.getPerson(s);
+  
   if (that_Person != null) {
-	  if(that_Person.getFatherName() != null) {
-		 System.out.println("Father: "+that_Person.getFatherName());
-	  }else {
-		  System.out.println("no Father");
-	  }
-	  if(that_Person.getMotherName() != null) {
-			 System.out.println("Mother: "+that_Person.getMotherName());
-		  }else {
-			  System.out.println("no Mother");
-		  }
-	  if(that_Person.getChildren().size() > 0) {
-		  System.out.printf("Has %d kids:",that_Person.getChildren().size());
-		  System.out.println();
-		  for(int i=0;i<that_Person.getChildren().size();i++) {
-			  System.out.println(that_Person.getChildren().get(i).getName());
-		  }
-	  }else {
-		  System.out.println("Has no kid");
-	  }
-	  
-	  
+	  that_Person.showDetials();
   }else {
 	  System.out.println("cannot find this person");
   }

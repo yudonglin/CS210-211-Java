@@ -59,7 +59,7 @@ public class familyDatabase {
    public int ifAdded(String personName) {
 	   if(this.allPersons.size()>0) {
 		   for(int i=0; i<this.allPersons.size();i++) {
-			   if(this.allPersons.get(i).getName().equals(personName)) {
+			   if(this.allPersons.get(i).getName().equalsIgnoreCase(personName)) {
 				   return i;
 			   }
 		   }
@@ -80,7 +80,7 @@ public class familyDatabase {
 	public void getPersonDetails(String name) {
 	   int person_id = ifAdded(name);
 	   if (person_id != -1) {
-		   this.allPersons.get(person_id).familyToString();
+		   this.allPersons.get(person_id).showDetials();
 	   }
    }
 

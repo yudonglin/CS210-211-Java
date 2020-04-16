@@ -102,11 +102,27 @@ public class Person {
 		return childrenS;
 	}
 	
-	public void familyToString() { //This is for testing purposes. I plan to remove it later.
+	public void showDetials() { //This is for testing purposes. I plan to remove it later.
 		System.out.println("Person: " + name);
-		System.out.println("Father: " + father.nameToString());
-		System.out.println("Mother: " + mother.nameToString());
-		System.out.println("Children: " + childrenToString());
+		if(this.getFatherName() != null) {
+			 System.out.println("Father: "+this.getFatherName());
+		  }else {
+			  System.out.println("no Father");
+		  }
+		  if(this.getMotherName() != null) {
+				 System.out.println("Mother: "+this.getMotherName());
+			  }else {
+				  System.out.println("no Mother");
+			  }
+		  if(this.getChildren().size() > 0) {
+			  System.out.printf("Has %d kids:",this.getChildren().size());
+			  System.out.println();
+			  for(int i=0;i<this.getChildren().size();i++) {
+				  System.out.println(this.getChildren().get(i).getName());
+			  }
+		  }else {
+			  System.out.println("Has no kid");
+		  }
 	}
 	
 }
