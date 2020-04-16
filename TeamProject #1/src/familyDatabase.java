@@ -24,9 +24,15 @@ public class familyDatabase {
 		   }else {
 			   String motherName = scan.nextLine();
 			   String fatherName = scan.nextLine();
-			   Person newSon = new Person(sonName);
+			   Person newSon;
+			   int id = ifAdded(sonName);
+			   if (id == -1) {
+				   newSon = new Person(sonName);
+			   }else {
+				   newSon = this.allPersons.get(id);
+			   }
 			   if (!motherName.equals("unknown")) {
-				   int id = ifAdded(motherName);
+				   id = ifAdded(motherName);
 				   if (id == -1) {
 					   Person newMother = new Person(motherName);
 					   this.allPersons.add(newMother);
@@ -36,7 +42,7 @@ public class familyDatabase {
 				   }
 			   }
 			   if (!fatherName.equals("unknown")) {
-				   int id = ifAdded(fatherName);
+				   id = ifAdded(fatherName);
 				   if (id == -1) {
 					   Person newFather = new Person(fatherName);
 					   newSon.setFather(newFather);
