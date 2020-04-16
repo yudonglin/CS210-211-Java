@@ -25,21 +25,25 @@ public class familyDatabase {
 			   String motherName = scan.nextLine();
 			   String fatherName = scan.nextLine();
 			   Person newSon = new Person(sonName);
-			   int id = ifAdded(motherName);
-			   if (id == -1) {
-				   Person newMother = new Person(motherName);
-				   this.allPersons.add(newMother);
-				   newSon.setMother(newMother);
-			   }else {
-				   newSon.setMother(this.allPersons.get(id));
+			   if (motherName != null) {
+				   int id = ifAdded(motherName);
+				   if (id == -1) {
+					   Person newMother = new Person(motherName);
+					   this.allPersons.add(newMother);
+					   newSon.setMother(newMother);
+				   }else {
+					   newSon.setMother(this.allPersons.get(id));
+				   }
 			   }
-			   id = ifAdded(fatherName);
-			   if (id == -1) {
-				   Person newFather = new Person(fatherName);
-				   newSon.setFather(newFather);
-				   this.allPersons.add(newFather);
-			   }else {
-				   newSon.setFather(this.allPersons.get(id));
+			   if (fatherName != null) {
+				   int id = ifAdded(fatherName);
+				   if (id == -1) {
+					   Person newFather = new Person(fatherName);
+					   newSon.setFather(newFather);
+					   this.allPersons.add(newFather);
+				   }else {
+					   newSon.setFather(this.allPersons.get(id));
+				   }
 			   }
 			   this.allPersons.add(newSon);
 		   }
