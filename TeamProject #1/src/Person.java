@@ -1,3 +1,4 @@
+//Defines a person and allows them to have a name, mother, father, and children.
 import java.util.ArrayList;
 
 public class Person {
@@ -14,71 +15,72 @@ public class Person {
 		this.children = new ArrayList<Person>();
 	}
 	
-	//Setters
-	public void setName(String name) {
+	public Person() { //blank constructor
+		this.name = null;
+		this.mother = null;
+		this.father = null;
+		this.children = new ArrayList<Person>();
+	}
+	
+//Setters
+	public void setName(String name) { //Set the name
 		this.name = name;
 	}
 	
-	public void setMother(Person mother) {
+	public void setMother(Person mother) { //Set the mother
 		this.mother = mother;
-		mother.addChildren(this);
+		mother.addChildren(this); //Automatically add this Person as a child of the mother.
 	}
 	
-	public void setFather(Person father) {
+	public void setFather(Person father) { //Set the father
 		this.father = father;
-		father.addChildren(this);
+		father.addChildren(this); //Automatically add this Person as a child of the father.
 	}
-	public void addChildren(Person child) {
+	
+	public void addChildren(Person child) { //Add a child
 		children.add(child);
 	}
-	public void setChild(int i, Person child) {
+	
+	public void setChild(int i, Person child) { //Set a child
 		children.set(i, child);
 	}
 	
-	//Getters
-	public String getName() {
+	
+//Getters
+	public String getName() { //Get the name from this Person (String)
 		return this.name;
 	}
 	
-	public Person getMother() {
+	public Person getMother() { //Get the mother (Person)
 		if (this.mother != null) {
 			return this.mother;
-		}else {
+		} else {
 			return null;
 		}
 	}
 	
-	public String getMotherName() {
+	public String getMotherName() { //Get the mother name (String)
 		if (this.mother != null) {
 			return this.mother.getName();
-		}else {
+		} else {
 			return null;
 		}
 	}
 	
-	public Person getFather() {
+	public Person getFather() { //Get the father (Person)
 		if (this.father != null) {
 			return this.father;
-		}else {
+		} else {
 			return null;
 		}
 	}
 	
-	public String getFatherName() {
+	public String getFatherName() { //Get the father name (String)
 		if (this.father != null) {
 			return this.father.getName();
 		}else {
 			return null;
 		}
-	}
-	
-	public boolean ifAChild(Person child) {
-		for(int i=0;i<this.children.size();i++) {
-			if(this.children.get(i).getName() == child.getName()) {
-				return true;
-			}
-		}
-		return false;
 	}
 	
 	public Person getChild(int i) { //Return one child at a specific index
@@ -88,41 +90,14 @@ public class Person {
 	public ArrayList<Person> getChildren() { //Return the whole index of children.
 		return children;
 	}
-
-	//Other
-	public String nameToString() {
-		return getName();
-	}
 	
-	public ArrayList<String> childrenToString() {
+
+//Other
+	public ArrayList<String> childrenToString() { //Returns the list of children as a list of Strings
 		ArrayList<String> childrenS = new ArrayList<>();
 		for (Person p: children) {
-			childrenS.add(p.nameToString());
+			childrenS.add(p.getName());
 		}
 		return childrenS;
 	}
-	
-	public void showDetials() { //This is for testing purposes. I plan to remove it later.
-		System.out.println("Person: " + name);
-		if(this.getFatherName() != null) {
-			 System.out.println("Father: "+this.getFatherName());
-		  }else {
-			  System.out.println("no Father");
-		  }
-		  if(this.getMotherName() != null) {
-				 System.out.println("Mother: "+this.getMotherName());
-			  }else {
-				  System.out.println("no Mother");
-			  }
-		  if(this.getChildren().size() > 0) {
-			  System.out.printf("Has %d kids:",this.getChildren().size());
-			  System.out.println();
-			  for(int i=0;i<this.getChildren().size();i++) {
-				  System.out.println(this.getChildren().get(i).getName());
-			  }
-		  }else {
-			  System.out.println("Has no kid");
-		  }
-	}
-	
 }
