@@ -1,0 +1,7 @@
+/* CS211 Yudong Lin 
+ * HW04
+ * 2 May 2020
+ * 5
+ * To which complexity class does the following algorithm belong?
+ */
+O(N/2)
