@@ -27,7 +27,7 @@ public class Ch11Ex15 {
 				}
 			}
 			//Check the value of the map
-			System.out.println("ex15-the map data about this list: "+mapTemp);
+			//System.out.println("ex15-the map data about this list: "+mapTemp);
 			
 			//Initial Iterator to loop the map
 			Iterator<Integer> iter = mapTemp.keySet().iterator();
