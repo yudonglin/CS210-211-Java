@@ -130,7 +130,7 @@ public class LinkedIntList implements IntList {
 		// make sure that both walker and walker.next is not null
         while (walker != null && walker.next != null) {
         	// if the value is positive, keep it inside the link list
-        	// walker keep going
+        	// walker can keep going forward
         	if (walker.next.data >= 0) {
         		walker = walker.next;
         	}else {
@@ -140,10 +140,10 @@ public class LinkedIntList implements IntList {
         		ListNode tempNodeList = walker.next.next;
         		// Connect walker.next with front (now it is a looped link list)
                 walker.next.next = front;
-                // set the walker.next, which contain the negative value as the head of the list
+                // set the walker.next, which contain the negative value, as the head of the list
                 front = walker.next;
-                // after rearranging new current negative value to be the head
-                // of the link list, break the loop and and nodes back
+                // after rearranging the new current negative value to be the head
+                // of the link list, break the loop and add nodes back
                 walker.next = tempNodeList;
         	}
         }
