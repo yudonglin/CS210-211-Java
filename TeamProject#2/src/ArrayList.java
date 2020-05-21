@@ -15,7 +15,7 @@ public class ArrayList<E> extends AbstractList<E>{
             throw new IllegalArgumentException("capacity: " + capacity);
         }
         elementData = (E[]) new Object[capacity];
-        setSize(0);
+        super.clear();
     }
 
     // post: constructs an empty list of default capacity
@@ -29,48 +29,17 @@ public class ArrayList<E> extends AbstractList<E>{
         checkIndex(index);
         return elementData[index];
     }
-
-    // post: creates a comma-separated, bracketed version of the list
-    public String toString() {
-        if (size() == 0) {
-            return "[]";
-        } else {
-            String result = "[" + elementData[0];
-            for (int i = 1; i < size(); i++) {
-                result += ", " + elementData[i];
-            }
-            result += "]";
-            return result;
-        }
-    }
-
-    // post : returns the position of the first occurrence of the given
-    //        value (-1 if not found)
-    public int indexOf(E value) {
-        for (int i = 0; i < size(); i++) {
-            if (elementData[i].equals(value)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    // post: returns true if the given value is contained in the list,
-    //       false otherwise
-    public boolean contains(E value) {
-        return indexOf(value) >= 0;
-    }
     
     // pre : 0 <= index <= size() (throws IndexOutOfBoundsException if not)
     // post: inserts the given value at the given index, shifting subsequent
     //       values right
     public void add(int index, E value) {
-    	addChecker(index,value);
         ensureCapacity(size() + 1);
         for (int i = size(); i >= index + 1; i--) {
             elementData[i] = elementData[i - 1];
         }
         elementData[index] = value;
+        addChecker(index,value);
     }
 
     // pre : 0 <= index < size() (throws IndexOutOfBoundsException if not)
@@ -117,29 +86,11 @@ public class ArrayList<E> extends AbstractList<E>{
     }
 
     private class ArrayListIterator extends AbstractIterator {
-        private int position;           // current position within the list
         
         // post: constructs an iterator for the given list
         public ArrayListIterator() {
-            position = 0;
             setremoveOK(false);
-        }
-
-        // post: returns true if there are more elements left, false otherwise
-        public boolean hasNext() {
-            return position < size();
-        }
-
-        // pre : hasNext() (throws NoSuchElementException if not)
-        // post: returns the next element in the iteration
-        public E next() {
-            if (!hasNext()) {
-                throw new NoSuchElementException();
-            }
-            E result = elementData[position];
-            position++;
-            setremoveOK(true);
-            return result;
+            setPos(0);
         }
 
         // pre : next() has been called without a call on remove (throws
@@ -147,8 +98,7 @@ public class ArrayList<E> extends AbstractList<E>{
         // post: removes the last element returned by the iterator
         public void remove() {
             super.remove();
-            ArrayList.this.remove(position - 1);
-            position--;
+            ArrayList.this.remove(getPos()-1);
         }
     }
 }

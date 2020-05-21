@@ -21,51 +21,15 @@ public class LinkedList<E> extends AbstractList<E>{
         return current.data;
     }
 
-    // post: creates a comma-separated, bracketed version of the list
-    public String toString() {
-        if (size() == 0) {
-            return "[]";
-        } else {
-            String result = "[" + front.next.data;
-            ListNode<E> current = front.next.next;
-            while (current != back) {
-                result += ", " + current.data;
-                current = current.next;
-            }
-            result += "]";
-            return result;
-        }
-    }
-
-    // post : returns the position of the first occurrence of the given
-    //        value (-1 if not found)
-    public int indexOf(E value) {
-        int index = 0;
-        ListNode<E> current = front.next;
-        while (current !=  back) {
-            if (current.data.equals(value)) {
-                return index;
-            }
-            index++;
-            current = current.next;
-        }
-        return -1;
-    }
-    // post: returns true if the given value is contained in the list,
-    //       false otherwise
-    public boolean contains(E value) {
-        return indexOf(value) >= 0;
-    }
-
     // pre: 0 <= index <= size() (throws IndexOutOfBoundsException if not)
     // post: inserts the given value at the given index, shifting subsequent
     //       values right
     public void add(int index, E value) {
-    	addChecker(index,value);
         ListNode<E> current = nodeAt(index - 1);
         ListNode<E> newNode = new ListNode<E>(value, current.next, current);
         current.next = newNode;
         newNode.next.prev = newNode;
+        addChecker(index,value);
     }
 
     // pre : 0 <= index < size() (throws IndexOutOfBoundsException if not)
@@ -143,23 +107,7 @@ public class LinkedList<E> extends AbstractList<E>{
         public LinkedIterator() {
         	setremoveOK(false);
             current = front.next;
-        }
-
-        // post: returns true if there are more elements left, false otherwise
-        public boolean hasNext() {
-            return current != back;
-        }
-
-        // pre : hasNext()
-        // post: returns the next element in the iteration
-        public E next() {
-            if (!hasNext()) {
-                throw new NoSuchElementException();
-            }
-            E result = current.data;
-            current = current.next;
-            setremoveOK(true);
-            return result;
+            setPos(0);
         }
 
         // pre : next() has been called without a call on remove (i.e., at most
