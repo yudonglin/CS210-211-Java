@@ -35,29 +35,21 @@ public class ArrayList<E> extends AbstractList<E>{
     //       values right
     public void add(int index, E value) {
         ensureCapacity(size() + 1);
+        addChecker(index,value);
         for (int i = size(); i >= index + 1; i--) {
             elementData[i] = elementData[i - 1];
         }
         elementData[index] = value;
-        addChecker(index,value);
     }
 
     // pre : 0 <= index < size() (throws IndexOutOfBoundsException if not)
     // post: removes value at the given index, shifting subsequent values left
     public void remove(int index) {
-        checkIndex(index);
         for (int i = index; i < size() - 1; i++) {
             elementData[i] = elementData[i + 1];
         }
         elementData[size() - 1] = null;
-        setSize(size()-1);
-    }
-
-    // pre : 0 <= index < size() (throws IndexOutOfBoundsException if not)
-    // post: replaces the value at the given index with the given value
-    public void set(int index, E value) {
-        checkIndex(index);
-        elementData[index] = value;
+        super.remove(index);
     }
 
     // post: list is empty

@@ -15,30 +15,33 @@ public abstract class AbstractList<E> implements List<E> {
         return size == 0;
     }
 	
-	//test, remove later
-	public void setSize(int value) {
-		size = value;
-	}
 	public void clear() {
 		size = 0;
 	}
 	
-	protected void checkIndex(int index) {
+	public void checkIndex(int index) {
 		if (index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException("index: " + index);
 		}
 	}
 	
+	public void set(int index, E value) {
+	    checkIndex(index);
+	    l.remove(index);
+	    l.add(index, value);
+	}
+	
 	// post: appends all values in the given list to the end of this list
     public void addAll(List<E> other) {
-        for (E value: other) {
-            add(value);
+    	Iterator<E> itr = other.iterator();
+        while(itr.hasNext()) {
+        	l.add(itr.next());
         }
     }
     
 	// post: appends the given value to the end of the list
 	public void add(E value) {
-	    add(size, value);
+	    l.add(size, value);
 	}
     
 	public void addChecker(int index, E value) {
@@ -72,6 +75,12 @@ public abstract class AbstractList<E> implements List<E> {
 			return -1;
 		}
     }
+    
+    //
+    public void remove(int index) {
+        checkIndex(index);
+        size--;
+    }
 	
 	public String toString() {
 		if (size == 0) {
@@ -93,7 +102,7 @@ public abstract class AbstractList<E> implements List<E> {
 	}
 	
 	public void iteratorTester() { //This method is just to demonstrate that the iterator works. Delete later.
-		Iterator itr = l.iterator();
+		Iterator<E> itr = l.iterator();
 		while (itr.hasNext()) {
 			System.out.println("Iterator: " + itr.next());
 		}

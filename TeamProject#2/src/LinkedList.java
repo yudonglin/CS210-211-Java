@@ -25,29 +25,20 @@ public class LinkedList<E> extends AbstractList<E>{
     // post: inserts the given value at the given index, shifting subsequent
     //       values right
     public void add(int index, E value) {
+    	addChecker(index,value);
         ListNode<E> current = nodeAt(index - 1);
         ListNode<E> newNode = new ListNode<E>(value, current.next, current);
         current.next = newNode;
         newNode.next.prev = newNode;
-        addChecker(index,value);
     }
 
     // pre : 0 <= index < size() (throws IndexOutOfBoundsException if not)
     // post: removes value at the given index, shifting subsequent values left
     public void remove(int index) {
-        checkIndex(index);
         ListNode<E> current = nodeAt(index - 1);
         current.next = current.next.next;
         current.next.prev = current;
-        setSize(size()-1);
-    }
-
-    // pre : 0 <= index < size() (throws IndexOutOfBoundsException if not)
-    // post: replaces the value at the given index with the given value
-    public void set(int index, E value) {
-        checkIndex(index);
-        ListNode<E> current = nodeAt(index);
-        current.data = value;
+        super.remove(index);
     }
 
     // post: list is empty
@@ -114,7 +105,7 @@ public class LinkedList<E> extends AbstractList<E>{
         //       one call per call on next)
         // post: removes the last element returned by the iterator
         public void remove() {
-        	super.remove();     
+        	super.remove();
             ListNode<E> prev2 = current.prev.prev;
             prev2.next = current;
             current.prev = prev2;
