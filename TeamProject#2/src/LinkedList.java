@@ -1,3 +1,13 @@
+/*
+ * Group 1: Jacob Patton, Kevin Akers, Milan Gurung, Yudong Lin
+ * CS211
+ * 5/24/2020
+ * 
+ * Modified for Group Assignment #2.
+ * This is the LinkedList class, which dictates the behavior of a LinkedList object.
+ * It extends AbstractList, allowing it to use the code from the superclass.
+*/
+
 // Class LinkedList<E> can be used to store a list of values of type E.
 
 import java.util.*;
@@ -25,11 +35,11 @@ public class LinkedList<E> extends AbstractList<E>{
     // post: inserts the given value at the given index, shifting subsequent
     //       values right
     public void add(int index, E value) {
-    	addChecker(index,value);
         ListNode<E> current = nodeAt(index - 1);
         ListNode<E> newNode = new ListNode<E>(value, current.next, current);
         current.next = newNode;
         newNode.next.prev = newNode;
+        addChecker(index,value);
     }
 
     // pre : 0 <= index < size() (throws IndexOutOfBoundsException if not)
@@ -105,7 +115,7 @@ public class LinkedList<E> extends AbstractList<E>{
         //       one call per call on next)
         // post: removes the last element returned by the iterator
         public void remove() {
-        	super.remove();
+        	super.remove();     
             ListNode<E> prev2 = current.prev.prev;
             prev2.next = current;
             current.prev = prev2;

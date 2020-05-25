@@ -1,3 +1,13 @@
+/*
+ * Group 1: Jacob Patton, Kevin Akers, Milan Gurung, Yudong Lin
+ * CS211
+ * 5/24/2020
+ * 
+ * Modified for Group Assignment #2.
+ * This is the ArrayList class, which dictates the behavior of an ArrayList object.
+ * It extends AbstractList, allowing it to use the code from the superclass.
+*/
+
 // Class ArrayList<E> can be used to store a list of values of type E.
 
 import java.util.*;
@@ -35,11 +45,11 @@ public class ArrayList<E> extends AbstractList<E>{
     //       values right
     public void add(int index, E value) {
         ensureCapacity(size() + 1);
-        addChecker(index,value);
         for (int i = size(); i >= index + 1; i--) {
             elementData[i] = elementData[i - 1];
         }
         elementData[index] = value;
+        addChecker(index,value);
     }
 
     // pre : 0 <= index < size() (throws IndexOutOfBoundsException if not)

@@ -1,3 +1,13 @@
+/*
+ * Group 1: Jacob Patton, Kevin Akers, Milan Gurung, Yudong Lin
+ * CS211
+ * 5/24/2020
+ * 
+ * Utilized in Group Assignment #2.
+ * This is the list interface. It defines the methods that must appear in classes that implement it.
+ * No changes have been made to this class aside from this header.
+*/
+
 // Generic interface for a List of E objects.
 
 public interface List<E> extends Iterable<E> {

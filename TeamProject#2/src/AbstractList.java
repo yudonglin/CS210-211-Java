@@ -1,64 +1,28 @@
+/*
+ * Group 1: Jacob Patton, Kevin Akers, Milan Gurung, Yudong Lin
+ * CS211
+ * 5/24/2020
+ * 
+ * Made for Group Assignment #2.
+ * This is the AbstractList class. It unifies the LinkedList and ArrayList classes, causing them to
+ * share various methods; reducing redundancy.
+*/
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public abstract class AbstractList<E> implements List<E> {
-	private int size;
+	private int size; //Keep track of the size of the list
 	private AbstractList<E> l = this; //store the list itself
+	
+	//Methods in this class are stored in the same order as they are in the list interface.
 	
 	// post: returns the current number of elements in the list
 	public int size() {
 	   return size;
 	}
 	
-	// post: returns true if list is empty, false otherwise
-	public boolean isEmpty() {
-        return size == 0;
-    }
-	
-	public void clear() {
-		size = 0;
-	}
-	
-	public void checkIndex(int index) {
-		if (index < 0 || index >= size()) {
-			throw new IndexOutOfBoundsException("index: " + index);
-		}
-	}
-	
-	public void set(int index, E value) {
-	    checkIndex(index);
-	    l.remove(index);
-	    l.add(index, value);
-	}
-	
-	// post: appends all values in the given list to the end of this list
-    public void addAll(List<E> other) {
-    	Iterator<E> itr = other.iterator();
-        while(itr.hasNext()) {
-        	l.add(itr.next());
-        }
-    }
-    
-	// post: appends the given value to the end of the list
-	public void add(E value) {
-	    l.add(size, value);
-	}
-    
-	public void addChecker(int index, E value) {
-        if (index < 0 || index > size()) {
-            throw new IndexOutOfBoundsException("index: " + index);
-        }
-        size++;
-	}
-	
-    // post: returns true if the given value is contained in the list,
-    //       false otherwise
-    public boolean contains(E value) {
-        return indexOf(value) >= 0;
-    }
-	
-	// post : returns the position of the first occurrence of the given
-    //        value (-1 if not found)
+	//Post: Return the index of a given value. Returns -1 if the value is not found.
     public int indexOf(E value) {
     	if (size == 0) {
 			return -1;
@@ -68,67 +32,113 @@ public abstract class AbstractList<E> implements List<E> {
 			while (itr.hasNext()) {
 				if(value.equals(itr.next())) {
 					return index;
-				}else {
+				} else {
 					index++;
 				}
 			}
 			return -1;
 		}
     }
+	
+	// post: returns true if list is empty, false otherwise
+	public boolean isEmpty() {
+        return size == 0;
+    }
+	
+    //Post: Return whether or not an item is in a list.
+    public boolean contains(E value) {
+        return indexOf(value) >= 0;
+    }
+	
+	//Post: Append a value to the end of the list.
+	public void add(E value) {
+	    add(size, value);
+	}
+	
+	//Post: Append all values from one list to the end of the current list.
+    public void addAll(List<E> other) {
+    	Iterator<E> itr = other.iterator();
+        while(itr.hasNext()) {
+        	l.add(itr.next());
+        }
+    }
     
-    //
+    //Remove function that checks the validity of a remove and reduces the size. Called from the subclasses.
     public void remove(int index) {
         checkIndex(index);
         size--;
     }
+    
+	//Replace a sepcific index with another value.
+	public void set(int index, E value) {
+	    l.remove(index); //Remove the item at the index
+	    l.add(index, value); //Add the new item at that index
+	}
 	
-	public String toString() {
+    //post: clear out the contents of the list, rendering it empty.
+  	public void clear() {
+  		size = 0;
+  	}
+    
+    //Convert the list to a String
+    public String toString() {
 		if (size == 0) {
 			return "[]";
-		} else {
+		} 
+		else {
 			Iterator<E> itr = l.iterator();
+			String result = "[" + itr.next();
 			while (itr.hasNext()) {
-				E first = itr.next();
-				String result = "[" + first;
-				for (int i = 1; i < size; i++) {
-					E next = itr.next();
-					result += ", " + next;
-					}
-				result += "]";
-				return result;
+				result += ", " + itr.next();
 			}
+			result += "]";
+			return result;
+			}
+	} 
+    
+	//throw an error if the index is not valid
+	public void checkIndex(int index) {
+		if (index < 0 || index >= size()) {
+			throw new IndexOutOfBoundsException("index: " + index);
 		}
-		return null;
 	}
 	
-	public void iteratorTester() { //This method is just to demonstrate that the iterator works. Delete later.
-		Iterator<E> itr = l.iterator();
-		while (itr.hasNext()) {
-			System.out.println("Iterator: " + itr.next());
-		}
+	//throw an error if the index is not valid. Designed mostly for add statements, as it expands the list for adds.
+	public void addChecker(int index, E value) {
+        if (index < 0 || index > size()) {
+            throw new IndexOutOfBoundsException("index: " + index);
+        }
+        size++;
 	}
     
-	public abstract class AbstractIterator implements Iterator<E> {
-		private int position; 
-        private boolean removeOK;
+	
+	
+	
+	public abstract class AbstractIterator implements Iterator<E> { //The abstract list iterator
+		private int position; //Keep track of where the iterator is
+        private boolean removeOK; //Keep track of whether or not it's okay to remove
         
+        //Set whether or not it's okay to remove the current item grabbed by the iterator
         public void setremoveOK(boolean situation) {
             removeOK = situation;
         }
         
+        //Move the position to a specific point
         public void setPos(int value) {
         	position = value;
         }
         
+        //Return the current position
         public int getPos() {
         	return position;
         }
         
-        // post: returns true if there are more elements left, false otherwise
+        //Post: Return true if there are still elements left to pass over.
         public boolean hasNext() {
             return position < size();
         }
         
+        //Move through the list
         public E next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
@@ -139,9 +149,8 @@ public abstract class AbstractList<E> implements List<E> {
             return result;
         }
         
-        // pre : next() has been called without a call on remove (i.e., at most
-        //       one call per call on next)
-        // post: removes the last element returned by the iterator
+        //Pre: removeOK must be true
+        //Post: Remove the element currently held by the iterator.
         public void remove() {
             if (!removeOK) {
                 throw new IllegalStateException();
