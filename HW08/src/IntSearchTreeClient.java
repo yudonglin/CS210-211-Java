@@ -52,5 +52,8 @@ public class IntSearchTreeClient {
         System.out.println("Tree Structure:");
         numbers.printSideways();
         System.out.println((numbers.contains(target) ? "Did" : "Didn't") + " find " + target);
+        //numbers.remove(11);
+        
+        System.out.println("the smallest data in the tree:" + numbers.getMin());
     }
 }

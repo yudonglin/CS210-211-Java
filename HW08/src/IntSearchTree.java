@@ -102,12 +102,30 @@ public class IntSearchTree {
         }
     }
     
+    // post: return the smallest data in the tree
+    public int getMin() {
+    	return getMin(overallRoot);
+    }
+    private int getMin(IntTreeNode root) {
+    	int minValue;
+    	// if root.left exist
+    	if(root.left != null) {
+    		minValue = getMin(root.left);
+    	// no? what about right side?
+    	}else if (root.right != null) {
+    		minValue = getMin(root.right);
+    	// ok, i think that we find that number
+    	}else {
+    		minValue =  root.data;
+    	}
+    	//return the minimum
+        return minValue;
+    }
+    
     // post: remove the value from the tree
 	public void remove(int value) {
 		overallRoot =  remove(overallRoot, value);
-    }   
-
-    // post: remove the value from the tree
+    }
     private IntTreeNode remove(IntTreeNode root, int value) {
         if (root == null) {
             // do nothing because I cannot find it
