@@ -1,26 +1,57 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Random;
 
-//µÚ16ÕÂµÚ1027#4Ò³
+/* CS211 Yudong Lin 
+ * Final Project
+ * 14 June 2020
+ * Chapter 15 Page 974, #4
+ */
+
 public class TestClient {
 
-	public static void main(String[] args) throws FileNotFoundException {
-    	System.out.println("Question 8:");
-    	// initialize the list
-    	LinkedStringList list1 = new LinkedStringList();
-        processList1(list1);
-        // print the list before switchPairs
-        System.out.println("List before switchPairs: "+list1.toString());
-        
-    }
-    
-    //add the elements into the list
-    public static void processList1(LinkedStringList list) throws FileNotFoundException {
-    	Scanner scan = new Scanner(new File("src/names.txt"));
-    	while (scan.hasNextLine()) {
-    		list.add(scan.nextLine());
-    	}
+	public static void main(String[] args) {
+		// initialize the SortedIntList
+		SortedIntList theList = new SortedIntList();
+		
+		
+		// set the amount of elements that you plan to put inside the SortedIntList;
+		int lenOfarray = 10;
+		
+		for (int a=0;a<100;a++) {
+			theList.clear();
+			int[] comparison = new int[10];
+			
+			Random r = new Random();
+			for (int i=0;i<lenOfarray;i++) {
+				//System.out.println("The SortedIntList: "+theList.toString());
+				int num = r.nextInt(100);
+				theList.add(num);
+				comparison[i] = num;
+			}
+			Arrays.sort(comparison);
+			if (!theList.euqlas(comparison)) {
+				System.out.println("Erro");
+			}
+		}
+		
+		// you also can add the value with add method
+		theList.add(0);
+		
+		
+		// set the parameter for indexOf() here
+		int tempValue = 18;
+		
+		// print all the elements in the SortedIntList
+		System.out.println("The SortedIntList: "+theList.toString());
+		
+		// does the SortedIntList contain tempValue
+		boolean ifContain = theList.contains(tempValue);
+		
+		// print the result
+		System.out.println("Does the SortedIntList contain number "+tempValue+": "+ifContain);
+		if (ifContain == true) {
+			System.out.println("And its index is: "+theList.indexOf(tempValue));
+		}
 
-    }
+	}
 }
