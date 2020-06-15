@@ -4,42 +4,55 @@ import java.util.Random;
 /* CS211 Yudong Lin 
  * Final Project
  * 14 June 2020
- * Chapter 15 Page 974, #4
+ * Chapter 15 Page 974, #4:
+ * Based on the implementation of ArayIntlit or Arraylist, write a class SortedIntlist
+ * that provides most of the same operations but maintains its elements in sorted order.
+ * When a new value is added to the sorted list, rather than appending it to the end of
+ * the list, it is place in the appropriate index to maintain sorted order of the overall list.
  */
 
 public class TestClient {
 
 	public static void main(String[] args) {
-		// initialize the SortedIntList
+		// initialize a SortedIntList
 		SortedIntList theList = new SortedIntList();
-		
 		
 		// set the amount of elements that you plan to put inside the SortedIntList;
 		int lenOfarray = 10;
+		// initialize a random class
+		Random r = new Random();
 		
+		// loop 100 times to make sure that add method is working properly
 		for (int a=0;a<100;a++) {
+			// first, initialize the SortedIntList
 			theList.clear();
+			// and an empty array as comparison
 			int[] comparison = new int[10];
-			
-			Random r = new Random();
+			// add several random integers into both SortedIntList and comparison
+			// you can customize the length above in lenOfarray
 			for (int i=0;i<lenOfarray;i++) {
-				//System.out.println("The SortedIntList: "+theList.toString());
+				//random an integer
 				int num = r.nextInt(100);
 				theList.add(num);
 				comparison[i] = num;
 			}
+			// using Arrays.sort to sort the comparison
 			Arrays.sort(comparison);
+			// than compare it with the SortedIntList
+			// if they are different, the program will print Error
 			if (!theList.euqlas(comparison)) {
-				System.out.println("Erro");
+				System.out.println("Error");
 			}
 		}
 		
-		// you also can add the value with add method
-		theList.add(0);
+		//theList.clear();
 		
+		// you still can add the value with add method
+		theList.add(0);
 		
 		// set the parameter for indexOf() here
 		int tempValue = 18;
+		//theList.add(tempValue);
 		
 		// print all the elements in the SortedIntList
 		System.out.println("The SortedIntList: "+theList.toString());
@@ -49,6 +62,7 @@ public class TestClient {
 		
 		// print the result
 		System.out.println("Does the SortedIntList contain number "+tempValue+": "+ifContain);
+		// if contain, than find out its index
 		if (ifContain == true) {
 			System.out.println("And its index is: "+theList.indexOf(tempValue));
 		}

@@ -1,7 +1,11 @@
 /* CS211 Yudong Lin 
  * Final Project
  * 14 June 2020
- * Chapter 15 Page 974, #4
+ * Chapter 15 Page 974, #4:
+ * Based on the implementation of ArayIntlit or Arraylist, write a class SortedIntlist
+ * that provides most of the same operations but maintains its elements in sorted order.
+ * When a new value is added to the sorted list, rather than appending it to the end of
+ * the list, it is place in the appropriate index to maintain sorted order of the overall list.
  */
 
 import java.util.Arrays;
@@ -98,9 +102,9 @@ public class SortedIntList {
 
     // pre : size() < capacity (throws IllegalStateException if not) &&
     //       0 <= index <= size() (throws IndexOutOfBoundsException if not)
-    // post: inserts the given value at the given index, shifting subsequent
-    //       values right   
+    // post: inserts the given value, shifting subsequent values right   
     public void add(int value) {
+    	// Initialize index to 0
     	int index = 0;
     	// if array is not empty
     	if (size > 1) {
@@ -108,6 +112,7 @@ public class SortedIntList {
     		int startPoint = 0;
     		// the ending point
     		int endPoint = size-1;
+    		// set index to -1 so we can tell whether the array already contain the new value
     		index = -1;
     		// while the difference between endPoint and startPoint are bigger than 1
     		while(endPoint-startPoint>1) {
@@ -125,26 +130,32 @@ public class SortedIntList {
     			// if the value on middle point equals to the value we need to put
     			}else {
     				// this mean that this array already contain this value
-    				// than we set the ending point to equal to the starting point
-    				// and break out
+    				// than set the index to midPoint+1 so we do not need to swap one more time
+    				// and then break out
     				index = midPoint+1;
     				break;
     			}
     		}
+    		// if the array do not contain the new value
     		if (index == -1) {
+    			// if the value is smaller than the element on the starting point
     			if (value <= elementData[startPoint]) {
     				index = startPoint;
-    			} else if (value <= elementData[startPoint+1]){
-    				index = startPoint+1;
+    			// if the value is smaller than the element on the ending point
+    			} else if (value <= elementData[endPoint]){
+    				index = endPoint;
+    			// if the value is bigger than the element on the ending point
     			} else {
-    				index = startPoint+2;
+    				index = endPoint+1;
     			}
     		}
+    	// if there is only one element inside the current elementData array
     	} else if (size == 1 && value > elementData[0]) {
     		index = 1;
     	}
         ensureCapacity(size + 1); //this public method throws the exception
         for (int i = size; i > index; i--) {
+        	//swap the elements
             elementData[i] = elementData[i - 1];
         }
         elementData[index] = value;
@@ -194,10 +205,15 @@ public class SortedIntList {
     	}
     }
     
- // post: quickly add all elements from an array L to
-    //		 to the current ArrayIntList
+    // post: check whether the current elementData array equals to an input array
     public boolean euqlas(int[] L) {
+    	// if the two arrays has different size
+    	if (size != L.length) {
+			return false;
+		}
     	for(int i=0;i<L.length;i++) {
+    		// if the two arrays has different element on the same index
+    		// than they are not equal
     		if (elementData[i] != L[i]) {
     			return false;
     		}
