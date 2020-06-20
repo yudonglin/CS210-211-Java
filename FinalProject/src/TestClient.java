@@ -45,13 +45,27 @@ public class TestClient {
 			}
 		}
 		
-		//theList.clear();
+		theList.clear();
 		
 		// you still can add the value with add method
-		theList.add(0);
+		theList.add(-1);
+		theList.add(3);
+		theList.add(5);
+		theList.add(8);
+		theList.add(15);
+		theList.add(18);
+		theList.add(22);
+		theList.add(39);
+		theList.add(40);
+		theList.add(42);
+		theList.add(50);
+		theList.add(57);
+		theList.add(71);
+		theList.add(73);
+		theList.add(74);
 		
 		// set the parameter for indexOf() here
-		int tempValue = 18;
+		int tempValue = 42;
 		//theList.add(tempValue);
 		
 		// print all the elements in the SortedIntList
@@ -64,6 +78,8 @@ public class TestClient {
 		System.out.println("Does the SortedIntList contain number "+tempValue+": "+ifContain);
 		// if contain, than find out its index
 		if (ifContain == true) {
+			System.out.println("");
+			System.out.println("size: "+theList.size());
 			System.out.println("And its index is: "+theList.indexOf(tempValue));
 		}
 

@@ -68,7 +68,8 @@ public class SortedIntList {
 		while(startPoint<=endPoint) {
 			// set the middle point to the middle point between the starting
 			// point and the ending point
-			int midPoint = (endPoint+startPoint)/2;	
+			int midPoint = (endPoint+startPoint)/2;
+			System.out.println(midPoint);
 			// if the value we need to find is smaller than the value on middle point
 			if (value < elementData[midPoint]) {
 				// we know that the index must be somewhere before the middle point
