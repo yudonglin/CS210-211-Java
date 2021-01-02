@@ -1,0 +1,2 @@
+There are 10 female students.
+Their average age is 20.2.
